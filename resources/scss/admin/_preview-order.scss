@@ -1,0 +1,58 @@
+#previewModal {
+  //left: 50%;
+  //transform: translateX(-50%);
+  background: transparent;
+
+  .modal-title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}
+
+.order {
+  margin-bottom: 1rem;
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .table-order {
+    thead, tbody, tfoot, tr, td, th {
+    }
+
+    td, th {
+      max-width: 120px;
+    }
+
+    thead {
+      tr {
+        text-align: center;
+      }
+    }
+
+    tbody {
+      tr {
+        text-align: center;
+      }
+    }
+  }
+
+  .photos {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    margin: 0 -1rem;
+
+    .photo {
+      cursor: pointer;
+      padding: 0 1rem;
+
+      img {
+        height: 180px;
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+// Body
+$body-bg: #FFFFFF;
+
+// Typography
+$font-family-sans-serif: 'Roboto Condensed', sans-serif;
+$font-size-base: 0.875rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66D9b;
+$red: #F5521E;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #00953C;
+$teal: #B1CA00;
+$cyan: #6cb2eb;
+
+$gray-800: #313131 !default;
+$gray-100: #f8f9fa !default;
+$gray-900: #212529 !default;
+$gray-400: #EEEEEE !default;
+
+$primary: #2f73df !default;
+$secondary: #e31e24 !default;
+$success: #00953C !default;
+$info: #6cb2eb !default;
+$warning: #ffed4a !default;
+$danger: #F5521E !default;
+$light: #f8f9fa !default;
+$dark: #212529 !default;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+) !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1258px,
+  xxl: 1800px
+) !default;
+
+$container-max-widths: (
+  sm: 600px,
+  md: 768px,
+  lg: 960px,
+  xl: 1254px,
+  xxl: 1619px
+) !default;
+
+//$btn-font-family: $font-family-sans-serif;
+//$btn-font-size: 20px;
+$btn-font-weight: 700;
+//$btn-border-radius: 0;
+//$btn-line-height: 38px;
+//$btn-padding-x: 10px;
+//$btn-padding-y: 0;
+
+
+// form-control
+$input-border-color: gray;
+//$input-border-radius: 0;
+$input-placeholder-color: #ADB5BDFF;
+
+
+// links <a>
+$link-font-weight: 700;
+$link-decoration: none;
+
+$card-spacer-y: 1.75rem;
+$card-spacer-x: 2rem;
+$card-border-color: rgba(0, 0, 0, 0.075);
+
+$table-cell-padding-x-sm: .75rem;
+
+$alert-padding-y: .75rem;
+
+$fa-font-path: "/fonts" !default;
+
+$aspect-ratios: (
+  "1x1": 100%,
+  "4x3": calc(3 / 4 * 100%),
+  "16x9": calc(9 / 16 * 100%),
+  "21x9": calc(9 / 21 * 100%),
+  "20x30": calc(30 / 20 * 100%),
+  "10x15": calc(15 / 10 * 100%),
+  "47x70": calc(70 / 47 * 100%),
+);
+
+$input-box-shadow: unset;
+$input-focus-box-shadow: unset;

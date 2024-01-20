@@ -1,0 +1,48 @@
+.orders-wrapper {
+  .table-orders {
+    thead, tbody, tfoot, tr, td, th {
+
+    }
+
+    thead {
+      tr {
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+
+    tbody {
+      tr {
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.editing-input {
+  border: unset;
+  background: transparent;
+  padding: 0;
+  text-align: center;
+  border-radius: unset;
+
+  &.active {
+    border-bottom: 1px solid;
+  }
+
+  &:focus {
+    box-shadow: unset;
+  }
+
+  &:read-only {
+    background: transparent;
+  }
+}
+
+.table-order-button {
+  display: inline-block;
+  color: #0a1520;
+  border-bottom: 1px dashed;
+  line-height: 1.2;
+}

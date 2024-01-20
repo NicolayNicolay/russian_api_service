@@ -1,0 +1,21 @@
+.cursor-p {
+  cursor: pointer;
+}
+.file-uploads {
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  display: inline-block;
+}
+.file-uploads.file-uploads-html5 input[type="file"] {
+  overflow: hidden;
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  z-index: -1;
+  opacity: 0;
+  cursor: pointer;
+}
+.file-uploads.file-uploads-html4 input, .file-uploads.file-uploads-html5 label {
+  cursor: pointer !important;
+}
