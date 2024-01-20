@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-git clone git@github.com:enterprise-it-ru/srussian_api_service.git russian_api_service.local
+git clone git@github.com:NicolayNicolay/srussian_api_service.git russian_api_service.local
 cd russian_api_service.local
 composer install
 ```
