@@ -1,8 +1,8 @@
 <template>
   <!--    <div class="form-control form-control-sm" :class="errors && errors.has(name) ? 'is-invalid' : ''">-->
   <select class="form-select" :multiple="multiple" :name="name" :id="id"
-          :disabled="disable" :data-live-search="live_search" v-model="selected">
-    <option v-if="default_nothing" value="" :disabled="true">{{ default_nothing_text }}</option>
+          :disabled="disable" :data-live-search="live_search" v-model="selected" >
+    <option v-if="default_nothing" value="" :disabled="disableDefault">{{ default_nothing_text }}</option>
     <!--    <option v-for="(item,index) in items" :value="item.id" v-html="getName(item)" :key="index"></option>-->
     <option v-for="(item,index) in items" :value="item.value" :key="index">{{ item.name }}</option>
   </select>
@@ -40,6 +40,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    disableDefault: {
+      type: Boolean,
+      default: true
+    }
   },
   data()
   {

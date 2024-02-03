@@ -50,7 +50,17 @@
     color: black;
   }
 }
+.badge-success {
+  background: #1abd5b;
+  color: white;
+  font-size: 12px;
+}
 
+.badge-moderate {
+  background: #2faefb;
+  color: #0d1116;
+  font-size: 12px;
+}
 @include media-breakpoint-down(md) {
   #app {
     .dashboard {

@@ -64,16 +64,12 @@ class Orders extends Model
         'payment_status_name',
         'table_color',
         'avail_payment',
+        'status_stage_name',
+        'status_state_name',
+        'payment_state_name',
     ];
 
     protected $guarded = ['code', 'season_id'];
-
-//    public static function boot(): void
-//    {
-//        Orders::deleted(function ($order) {
-//            $order->errors()->delete();
-//        });
-//    }
 
     /**
      * Получение объектов с заполненными трек номерами
@@ -109,7 +105,18 @@ class Orders extends Model
 
     public function scopeProcessed(Builder $builder): Builder
     {
-        return $builder->whereNull('processed_paid');
+        return $builder->where(
+            static function (Builder $query) {
+                $query->whereNull('processed_paid')
+                    ->orWhere(
+                        static function (Builder $query) {
+                            $query->whereNotNull('processed_paid')
+                                ->whereNotNull('payment_state')
+                                ->where('payment_state', '!=', 3);
+                        }
+                    );
+            }
+        );
     }
 
     public function scopeState(Builder $builder, array $codes): Builder
@@ -233,6 +240,28 @@ class Orders extends Model
             ];
         }
         return null;
+    }
+
+    public function getPaymentStateNameAttribute(): ?string
+    {
+        if ($this->payment_state) {
+            $values = config('tracking.payment_state');
+            $key = array_search($this->payment_state, array_column($values, 'id'));
+            return $values[$key]['name'];
+        }
+        return null;
+    }
+
+    public function getStatusStageNameAttribute(): ?string
+    {
+        $order = $this->statusPost()->first();
+        return $order?->stage;
+    }
+
+    public function getStatusStateNameAttribute(): ?string
+    {
+        $order = $this->statusPost()->first();
+        return $order?->state;
     }
 
     public function modelFilter(): string

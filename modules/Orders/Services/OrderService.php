@@ -9,6 +9,7 @@ use Modules\Orders\Models\Orders;
 use Modules\OrderTracking\Models\PostResponse;
 use Modules\Seasons\Models\Seasons;
 use Modules\Seasons\Resources\SeasonSelectResource;
+use Modules\Seasons\Resources\SelectResource;
 
 class OrderService
 {
@@ -35,7 +36,7 @@ class OrderService
     public static function getSeasons(): Collection
     {
         $discounts = (new Seasons())->all();
-        return collect(SeasonSelectResource::collection($discounts));
+        return collect(SelectResource::collection($discounts));
     }
 
     public static function getStatuses(): Collection

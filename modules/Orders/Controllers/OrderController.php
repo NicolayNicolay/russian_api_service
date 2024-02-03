@@ -16,6 +16,7 @@ use Modules\Orders\Models\Orders;
 use Modules\Orders\Services\OrderService;
 use Modules\Orders\Services\OrderUploadService;
 use Modules\Orders\Services\UnloadService;
+use Modules\Sms\Forms\SmsForm;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
 
 class OrderController extends Controller
@@ -65,6 +66,7 @@ class OrderController extends Controller
                 ->ordersSort($sorting)
                 ->paginate($per_page),
             'payment_state' => $states,
+            'sms_form'      => (new SmsForm())->form()->getArray(),
         ];
     }
 

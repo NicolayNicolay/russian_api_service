@@ -6,9 +6,10 @@ use Modules\Dashboard\Controllers\DashboardController;
 use Modules\Files\Controllers\FileController;
 use Modules\History\Controllers\HistoryController;
 use Modules\Orders\Controllers\OrderController;
-use Modules\Orders\Services\OrderService;
 use Modules\Pages\Controllers\PageController;
 use Modules\Seasons\Controllers\SeasonController;
+use Modules\Sms\Controllers\SmsController;
+use Modules\Sms\Controllers\TemplateController;
 use Modules\Users\Controllers\UsersController;
 use Modules\Roles\Controllers\RoleController;
 use Modules\Roles\Controllers\RoleFormController;
@@ -35,6 +36,29 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::get('/get_form/{id?}', [SeasonController::class, 'getFormParams'])->name('seasons.get_form');
         Route::post('/store', [SeasonController::class, 'store'])->name('seasons.store');
         Route::get('/remove/{id?}', [SeasonController::class, 'destroy'])->name('seasons.remove_form');
+    });
+    //Шаблоны смс
+    Route::group(['prefix' => 'sms'], static function () {
+        Route::get('/', [PageController::class, 'smsSections'])->name('sms.sections');
+        Route::post('/store', [SmsController::class, 'store'])->name('sms.store');
+        Route::group(['prefix' => 'templates'], static function () {
+            Route::get('/', [TemplateController::class, 'index'])->name('templates.index');
+            Route::get('/add', [TemplateController::class, 'add'])->name('templates.add');
+            Route::get('/edit/{id?}', [TemplateController::class, 'edit'])->name('templates.edit');
+            Route::get('/apiList', [TemplateController::class, 'apiList'])->name('templates.apiList');
+            Route::get('/get_form/{id?}', [TemplateController::class, 'getFormParams'])->name('templates.get_form');
+            Route::post('/store', [TemplateController::class, 'store'])->name('templates.store');
+            Route::get('/remove/{id?}', [TemplateController::class, 'destroy'])->name('templates.remove_form');
+        });
+        Route::group(['prefix' => 'list'], static function () {
+            Route::get('/', [SmsController::class, 'index'])->name('list.index');
+            Route::get('/show/{id?}', [SmsController::class, 'show'])->name('list.show');
+            Route::get('/get_data/{id?}', [SmsController::class, 'getData'])->name('list.getData');
+            Route::get('/apiList', [SmsController::class, 'apiList'])->name('list.apiList');
+            Route::get('/success/{id?}', [SmsController::class, 'success'])->name('list.success');
+            Route::get('/remove/{id?}', [SmsController::class, 'destroy'])->name('list.remove');
+            Route::post('/removeElement', [SmsController::class, 'destroyElement'])->name('templates.destroyElement');
+        });
     });
     //Заказы
     Route::group(['prefix' => 'orders'], static function () {
@@ -79,6 +103,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     });
 });
 
-Route::get('/test', function (OrderService $service) {
-    phpinfo();
+Route::get('/test', function () {
 });

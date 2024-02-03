@@ -8,8 +8,8 @@ return [
                 'key'   => 'otpravka_key',
             ],
             'tracking' => [
-                'login'    => '***',
-                'password' => '***',
+                'login'    => '',
+                'password' => '',
             ],
         ],
     ],

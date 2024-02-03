@@ -5,6 +5,14 @@
       <div v-if="success" class="alert alert-success mb-3" role="alert">
         Данные успешно изменены
       </div>
+      <div class="alert alert-info mb-3">
+        Список макропеременных
+        <ul>
+          <li v-for="(item, index) in description" :key="index">
+            {{ index }}: {{ item }}
+          </li>
+        </ul>
+      </div>
       <div v-for="(error, i) in showErrors" :key="i" class="alert alert-danger mb-3" role="alert">
         {{ error[0] }}
       </div>
@@ -20,13 +28,14 @@
                 :model.sync="fields.value"
                 class="form-control form-control-sm"
               ></input-text-component>
-              <input-check-box
-                v-if="fields.type === 'checkbox'"
+              <textarea-component
+                v-if="fields.type === 'textarea'"
                 :name="fields.name"
                 :id="fields.id"
                 :model.sync="fields.value"
-                :label="fields.label"
-              ></input-check-box>
+                class="form-control form-control-sm"
+              >
+              </textarea-component>
             </div>
           </div>
           <div class="col-lg-6">
@@ -51,10 +60,11 @@ import InputTextComponent from "../../FormInputs/InputTextComponent.vue";
 import LoadingComponent from "../../LoadingComponent.vue";
 import DisplayErrors from "../../DisplayErrors.vue";
 import InputCheckBox from "../../FormInputs/InputCheckBox.vue";
+import TextareaComponent from "../../FormInputs/TextAreaComponent.vue";
 
 export default {
-  name: "SeasonForm",
-  components: {InputCheckBox, DisplayErrors, LoadingComponent, InputTextComponent},
+  name: "TemplateForm",
+  components: {TextareaComponent, InputCheckBox, DisplayErrors, LoadingComponent, InputTextComponent},
   props: {
     id: {
       type: Number,
@@ -69,6 +79,7 @@ export default {
       errors: null,
       updateErrors: 0,
       success: false,
+      description: [],
       action: '',
       type: '',
     }
@@ -84,11 +95,12 @@ export default {
   methods: {
     getForm() {
       this.loading = true;
-      axios.get('/admin/seasons/get_form' + (this.id != 0 ? '/' + this.id : ''))
+      axios.get('/admin/sms/templates/get_form' + (this.id !== 0 ? '/' + this.id : ''))
         .then((response) => {
           this.action = response.data.action;
           this.form = response.data.form;
           this.type = response.data.type;
+          this.description = response.data.description;
         })
         .catch((error) => {
           if (error) {

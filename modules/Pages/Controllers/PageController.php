@@ -14,4 +14,9 @@ class PageController
     {
         return redirect('/admin');
     }
+
+    public function smsSections(): Factory | View | Application
+    {
+        return view('admin.sms.sections');
+    }
 }

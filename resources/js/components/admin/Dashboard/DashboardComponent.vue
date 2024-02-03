@@ -106,56 +106,70 @@
           </div>
           <div class="row">
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">Всего</div>
+              <a href="/admin/orders" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Всего</span>
+                    <arrow-link-icon></arrow-link-icon>
+                  </div>
                   <div class="dashboard-link">{{ getFormatPrice(data.payments.total) }}</div>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">Индекс 344000</div>
+              <a href="/admin/orders?dashboard=1" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Индекс 344000</span>
+                    <arrow-link-icon></arrow-link-icon>
+                  </div>
                   <div class="dashboard-link">{{ getFormatPrice(data.payments.index_344000) }}</div>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">
-                    Индекс 3444999
+              <a href="/admin/orders?dashboard=2" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Индекс 3444999</span>
+                    <arrow-link-icon></arrow-link-icon>
                   </div>
                   <div class="dashboard-link">{{ getFormatPrice(data.payments.index_344999) }}</div>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">Другой индекс</div>
+              <a href="/admin/orders?dashboard=3" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Другой индекс</span>
+                    <arrow-link-icon></arrow-link-icon>
+                  </div>
                   <div class="dashboard-link">{{ getFormatPrice(data.payments.index_another) }}</div>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">
-                    Прием
+              <a href="/admin/orders?dashboard=4" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Прием</span>
+                    <arrow-link-icon></arrow-link-icon>
                   </div>
                   <div class="dashboard-link">{{ getFormatPrice(data.payments.reception) }}</div>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">Другая стадия</div>
+              <a href="/admin/orders?dashboard=5" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Другая стадия</span>
+                    <arrow-link-icon></arrow-link-icon>
+                  </div>
                   <div class="dashboard-link">{{ getFormatPrice(data.payments.another_state) }}</div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
           <div class="col-sm-12 border-bottom pb-2 mb-4">
@@ -165,48 +179,59 @@
           </div>
           <div class="row">
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">Всего</div>
+              <a href="/admin/orders" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Всего</span>
+                    <arrow-link-icon></arrow-link-icon>
+                  </div>
                   <div class="dashboard-link">{{ data.not_payment.total }}</div>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">Лежат на почте</div>
+              <a href="/admin/orders?dashboard=6" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Лежат на почте</span>
+                    <arrow-link-icon></arrow-link-icon>
+                  </div>
                   <div class="dashboard-link">{{ data.not_payment.on_post }}</div>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">В пути</div>
+              <a href="/admin/orders?dashboard=7" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">В пути</span>
+                    <arrow-link-icon></arrow-link-icon>
+                  </div>
                   <div class="dashboard-link">{{ data.not_payment.on_way }}</div>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="col-sm-6 col-lg-3">
-              <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
-                  <div class="text-muted">Другое</div>
+              <a href="/admin/orders?dashboard=8" class="card shadow-sm mb-4">
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Другое</span>
+                    <arrow-link-icon></arrow-link-icon>
+                  </div>
                   <div class="dashboard-link">{{ data.not_payment.on_another }}</div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
           <div class="col-sm-12 border-bottom pb-2 mb-4">
             <h5>
-              <strong>
-                Процент выкупа</strong>
+              <strong>Процент выкупа</strong>
             </h5>
           </div>
           <div class="row">
             <div class="col-sm-6 col-lg-3">
               <div class="card shadow-sm mb-4">
-                <div class="card-body py-3">
+                <div class="card-body py-3 px-4">
                   <div class="dashboard-link">{{ data.percentage }}%</div>
                 </div>
               </div>
@@ -219,10 +244,11 @@
 </template>
 <script>
 import LoadingComponent from "../../LoadingComponent.vue";
+import ArrowLinkIcon from "../../Icons/ArrowLinkIcon.vue";
 
 export default {
   name: "DashboardComponent",
-  components: {LoadingComponent},
+  components: {ArrowLinkIcon, LoadingComponent},
   props: {
     seasons: {
       type: Array,

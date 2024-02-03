@@ -205,4 +205,18 @@ class OrdersFilter extends ModelFilter
     {
         return $this->where('track', '');
     }
+
+    public function dashboard($value)
+    {
+        return match ((int) $value) {
+            1 => $this->where('payment_state', 3)->where('payment_place_index', 344000),
+            2 => $this->where('payment_state', 3)->where('payment_place_index', 344999),
+            3 => $this->where('payment_state', 3)->whereNotIn('payment_place_index', ['344999', '344000']),
+            4 => $this->where('payment_state', 1),
+            5 => $this->whereNotIn('payment_state', [1, 3]),
+            6 => $this->whereIn('status', ['8_2_0', '8_25_0', '8_24_0']),
+            7 => $this->whereNotIn('status', ['8_2_0', '8_25_0', '8_24_0'])->where('status', 'like', '8_%'),
+            8 => $this->whereNotIn('status', ['8_2_0', '8_25_0', '8_24_0'])->where('status', 'not like', '8_%'),
+        };
+    }
 }

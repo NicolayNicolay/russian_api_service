@@ -48,8 +48,8 @@ class FilesForm extends AbstractForm
                 ->setNameAndId('season_id')
                 ->setValue(count($seasons) > 0 ? $seasons[0]->id : '')
                 ->setItems(
-                    static function () {
-                        return OrderService::getSeasons();
+                    static function () use ($seasons) {
+                        return $seasons;
                     }
                 )
                 ->get(),

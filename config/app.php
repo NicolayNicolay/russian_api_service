@@ -29,12 +29,13 @@ return [
     |
     */
 
-    'env'      => env('APP_ENV', 'production'),
+    'env'           => env('APP_ENV', 'production'),
 
 
     // Стандартное количество элементов на страницу
-    'per_page' => (int) env('PER_PAGE', 100),
-
+    'per_page'      => (int) env('PER_PAGE', 100),
+    'sms_login'    => env('SMS_LOGIN', ''),
+    'sms_password' => env('SMS_PASSWORD', ''),
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

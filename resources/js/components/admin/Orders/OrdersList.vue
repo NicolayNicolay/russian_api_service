@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12 col-xl-6">
           <div id="filter-panel" class="accordion-collapse collapse mt-3" :class="filterShow ? 'show': ''" aria-labelledby="panelsStayOpen-headingOne">
             <div class="card">
               <div class="card-body">
@@ -167,6 +167,51 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="filter-title p-0 pb-2 mt-2 mb-2 border-bottom">
+                        <h4 class="fw-bolder">Дашборд</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" v-model="filter.dashboard">
+                        <label class="form-check-label" for="inlineRadio1">Индекс 3444000</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2" v-model="filter.dashboard">
+                        <label class="form-check-label" for="inlineRadio2">Индекс 3444999</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3" v-model="filter.dashboard">
+                        <label class="form-check-label" for="inlineRadio3">Другой индекс</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4" v-model="filter.dashboard">
+                        <label class="form-check-label" for="inlineRadio4">Прием</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5" v-model="filter.dashboard">
+                        <label class="form-check-label" for="inlineRadio5"> Другая стадия</label>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="6" v-model="filter.dashboard">
+                        <label class="form-check-label" for="inlineRadio6">Лежат на почте</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio7" value="7" v-model="filter.dashboard">
+                        <label class="form-check-label" for="inlineRadio7">В пути</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio8" value="8" v-model="filter.dashboard">
+                        <label class="form-check-label" for="inlineRadio8">Другое</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="filter-title p-0 pb-2 mt-2 mb-2 border-bottom">
                         <h4 class="fw-bolder">Дополнительно</h4>
                       </div>
                     </div>
@@ -236,9 +281,39 @@
         </div>
       </div>
       <div class="parts-wrapper table-scroll overflow-x-scroll mt-4">
+        <div class="row mb-3">
+          <div class="col-6 offset-6 col-lg-3 ms-auto">
+            <div class="dropdown d-flex justify-content-end" v-if="!chooseUser">
+              <a class="btn btn-primary btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false">
+                <i class="fa-solid fa-envelope-square me-1"></i> SMS
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" @click.prevent="sendAllModal">Отправить всем</a>
+                <a class="dropdown-item" href="#" @click.prevent="sendChooseUser">Выбрать отправителя</a>
+              </div>
+            </div>
+            <div v-else class="d-flex align-items-center justify-content-end">
+            <span class="me-2">
+              Выбрано: {{ countChoose }}
+            </span>
+              <button class="btn btn-sm btn-primary ms-2" v-if="countChoose && countChoose > 0" @click.prevent="openSmsModal">
+                Отправить
+              </button>
+              <button class="btn btn-sm btn-secondary ms-2" @click.prevent="closeChooseUser">
+                Отменить
+              </button>
+            </div>
+          </div>
+        </div>
         <table class="table table-parts table-sm table-bordered table-hover">
           <thead class="table-light">
           <tr>
+            <th scope="col" rowspan="2" v-if="chooseUser">
+              <div class="form-check d-flex align-items-center justify-content-center">
+                <input class="form-check-input" type="checkbox" @change="toggleSendAllUser()" :checked="selectAll">
+              </div>
+            </th>
             <th scope="col" rowspan="2">Сезон</th>
             <th scope="col" rowspan="2" width="2%">
               <table-sort-title
@@ -319,6 +394,11 @@
           <tbody class="parts">
           <template v-if="this.data.data.length > 0">
             <tr v-for="(object, index) in this.data.data" :key="index" :style="object.table_color ? 'background-color:' + object.table_color : ''">
+              <td v-if="chooseUser">
+                <div class="form-check d-flex align-items-center justify-content-center">
+                  <input class="form-check-input" type="checkbox" :value="object.id" :id="'user-'+object.id" @change="toggleSendUser(object.id)" :checked="chooseUserList.includes(object.id)">
+                </div>
+              </td>
               <td>{{ object.season.name }}</td>
               <td>{{ object.lot_number }}</td>
               <td>{{ object.code }}</td>
@@ -382,10 +462,63 @@
           </tr>
           </tbody>
         </table>
-        <pagination-component v-if="this.data.data.length > 0" :paginated="data" :current-page="page" :counts="true" @updateList="updateObjectsList" @updateCounts="setCounts"></pagination-component>
+        <pagination-component v-if="this.data.data.length > 0" :paginated="data" :current-page="page" :counts="true" :find="true" @updateList="updateObjectsList" @updateCounts="setCounts"></pagination-component>
       </div>
     </div>
     <loading-component v-else></loading-component>
+    <div id="sms_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header justify-content-between">
+            <h3>Создать СМС рассылку</h3>
+            <button type="button" class="close" @click="closeSmsModal">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="modal-body" v-if="Object.keys(sms_form).length > 0">
+            <form @submit.prevent="submitSms">
+              <div class="row">
+                <div class="col-12">
+                  <div class="mb-3">
+                    <label :for="sms_form.template_id.id" class="form-label">{{ sms_form.template_id.label }}</label>
+                    <vue-select
+                      :name="sms_form.template_id.name"
+                      :id="sms_form.template_id.id"
+                      :items="sms_form.template_id.items"
+                      :model.sync="sms_form.template_id.value"
+                      :key="updateForm"
+                      :default_nothing="true"
+                      :disable-default="false"
+                      @selected="chooseTemplate"
+                    >
+                    </vue-select>
+                  </div>
+                  <div class="mb-3">
+                    <label :for="sms_form.text.id" class="form-label">{{ sms_form.text.label }}</label>
+                    <textarea-component
+                      :name="sms_form.text.name"
+                      :id="sms_form.text.id"
+                      :model.sync="sms_form.text.value"
+                      :key="updateText"
+                      :max="420"
+                      class="form-control form-control-sm"
+                    >
+                    </textarea-component>
+                    <div class="text-muted mt-2 fs-6">
+                      Максимальное кол-во символо для 1 сообщения - 70, при привышении лимита будет взиматься дополнительная плата
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" @click="closeSmsModal">Закрыть</button>
+            <button type="button" class="btn btn-primary" @click.prevent="submitSms">Создать рассылку</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -394,10 +527,12 @@ import LoadingComponent from "../../LoadingComponent.vue";
 import PaginationComponent from "../../PaginationComponent.vue";
 import TableSortTitle from "../../TableSortTitle.vue";
 import {isEmpty} from "lodash";
+import VueSelect from "../../FormInputs/VueSelect.vue";
+import TextareaComponent from "../../FormInputs/TextAreaComponent.vue";
 
 export default {
   name: "OrdersList",
-  components: {PaginationComponent, LoadingComponent, TableSortTitle},
+  components: {TextareaComponent, VueSelect, PaginationComponent, LoadingComponent, TableSortTitle},
   props: {
     message: {
       type: String,
@@ -426,6 +561,7 @@ export default {
         'text': '',
       },
       stages: [],
+      params: [],
       filter: {
         season_id: '',
         code: '',
@@ -448,6 +584,7 @@ export default {
         payment_state: '',
         empty_track: '',
         empty_np: '',
+        dashboard: '',
       },
       sorting: {
         sort_field: 'code',
@@ -456,14 +593,133 @@ export default {
       download_link: '',
       ready_download: false,
       payment_state: [],
+      sms_form: [],
+      updateText: 0,
+      sendAll: false,
+      chooseUser: false,
+      chooseUserList: [],
+      updateForm: 0,
+      selectAll: false,
+    }
+  },
+  computed: {
+    countChoose: function () {
+      return this.chooseUserList.length;
     }
   },
   mounted() {
     this.alert.text = this.message;
+    this.getFilterParams();
     this.getObjectsList();
     this.getStatusesStages();
+
   },
   methods: {
+    toggleSendAllUser() {
+      if (!this.selectAll) {
+        this.data.data.forEach((element) => {
+          let index = this.chooseUserList.indexOf(element['id']);
+          if (index === -1) {
+            this.chooseUserList.push(element['id']);
+          }
+        });
+      } else {
+        this.chooseUserList = [];
+      }
+      this.selectAll = !this.selectAll;
+    },
+    submitSms() {
+      axios.post('/admin/sms/store',
+        {
+          'sendAll': this.sendAll,
+          'ids': this.chooseUserList,
+          'filter': this.filter,
+          'form': this.sms_form
+        })
+        .then((response) => {
+          if (response.data.success) {
+            location.replace('/admin/sms/list/show/' + response.data.id);
+          }
+        })
+        .catch((error) => {
+          if (error) {
+            this.error = error.response;
+          } else {
+            alert('An error has occurred');
+          }
+        })
+        .finally(() => {
+          this.sendAll = false;
+          this.chooseUser = false;
+          this.chooseUserList = [];
+          this.clearSmsForm();
+        });
+    },
+    clearSmsForm() {
+      this.sms_form.template_id.value = '';
+      this.sms_form.text.value = '';
+      this.updateForm++;
+      this.updateText++;
+      this.closeSmsModal();
+    },
+    closeChooseUser() {
+      this.chooseUser = !this.chooseUser;
+      this.chooseUserList = [];
+      this.successSms = false;
+    },
+    toggleSendUser(id) {
+      let index = this.chooseUserList.indexOf(id);
+      if (index !== -1) {
+        this.chooseUserList.splice(index, 1);
+        this.selectAll = false;
+      } else {
+        this.chooseUserList.push(id);
+      }
+    },
+    sendAllModal() {
+      this.chooseUser = false;
+      this.chooseUserList = [];
+      this.sendAll = true;
+      this.openSmsModal();
+    },
+    sendChooseUser() {
+      this.sendAll = false;
+      this.chooseUser = true;
+    },
+    chooseTemplate() {
+      let text = '';
+      if (this.sms_form.template_id.value) {
+        text = this.sms_form.template_id.items.find(item => item.value === this.sms_form.template_id.value).text
+      } else {
+        text = '';
+      }
+      this.sms_form.text.value = text;
+      this.updateText++;
+    },
+    openSmsModal() {
+      $('#sms_modal').modal('show');
+    },
+    closeSmsModal() {
+      $('#sms_modal').modal('hide');
+    },
+    getFilterParams() {
+      this.params = window
+        .location
+        .search
+        .replace('?', '')
+        .split('&')
+        .reduce(
+          function (p, e) {
+            let a = e.split('=');
+            p[decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+            return p;
+          },
+          {}
+        );
+      if (this.params) {
+        this.filter = {...this.filter, ...this.params}
+      }
+    },
     filterObject() {
       this.filterShow = !this.filterShow;
       this.getObjectsList();
@@ -501,9 +757,9 @@ export default {
       this.ready_download = false;
       this.download_link = '';
     },
-    getObjectsList(page = 1) {
+    async getObjectsList(page = 1) {
       this.page = page;
-      axios.post('/admin/orders/ordersList',
+      await axios.post('/admin/orders/ordersList',
         {
           'page': page,
           'counts': this.counts,
@@ -514,6 +770,9 @@ export default {
           this.data = response.data.orders;
           if (isEmpty(this.payment_state)) {
             this.payment_state = response.data.payment_state;
+          }
+          if (isEmpty(this.sms_form)) {
+            this.sms_form = response.data.sms_form;
           }
         })
         .catch((error) => {
@@ -528,8 +787,19 @@ export default {
           this.loading = false;
         });
     },
-    updateObjectsList(data) {
-      this.getObjectsList(data);
+    async updateObjectsList(data) {
+      await this.getObjectsList(data);
+      this.showSelectList();
+    },
+    showSelectList() {
+      let flag = true;
+      this.data.data.forEach((element) => {
+        let index = this.chooseUserList.indexOf(element['id']);
+        if (index === -1) {
+          flag = false;
+        }
+      });
+      this.selectAll = flag;
     },
     setCounts(data) {
       this.counts = data;

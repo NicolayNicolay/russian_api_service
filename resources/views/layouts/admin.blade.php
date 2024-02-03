@@ -94,6 +94,13 @@
                                 </span>История загрузок
                                 </a>
                             </li>
+                            <li class="nav-item {{ Request::is('admin/sms') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('sms.sections') }}">
+                                <span class="icon text-primary">
+                                    <i class="fa-solid fa-envelope-square"></i>
+                                </span>СМС
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="{{ route('admin.logout') }}">
                                     <span class="icon text-primary">

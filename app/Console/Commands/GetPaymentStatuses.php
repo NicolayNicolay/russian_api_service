@@ -27,11 +27,12 @@ class GetPaymentStatuses extends Command
 
     public function start(): void
     {
-        $numbers = (new Orders())->activeSeason()->where('track', '34498585344812')->pluck('track')->toArray();
+        $numbers = (new Orders())->activeSeason()->where('track', '34498585349411')->pluck('track')->toArray();
         $Tracking = new Tracking('single', config('tracking.account'));
         foreach ($numbers as $number) {
             try {
                 $res = $Tracking->getNpayInfo($number);
+                dd($res);
                 $order = (new Orders())->where('track', $number)->first();
                 if ($res) {
                     $item = $res[count($res) - 1];
@@ -65,6 +66,7 @@ class GetPaymentStatuses extends Command
         $bar = $this->getOutput()->createProgressBar(count($numbers));
         $Tracking = new Tracking('single', config('tracking.account'));
         foreach ($numbers as $number) {
+            sleep(1);
             try {
                 $res = $Tracking->getNpayInfo($number->track);
                 if ($res) {

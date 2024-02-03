@@ -95,3 +95,28 @@ Breadcrumbs::for('admin.dashboard', function (BreadcrumbTrail $trail) {
     $trail->parent('admin');
     $trail->push('Дашборд', route('dashboard.index'));
 });
+// Templates
+Breadcrumbs::for('admin.sms', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin');
+    $trail->push('СМС', route('sms.sections'));
+});
+Breadcrumbs::for('admin.sms.templates', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.sms');
+    $trail->push('Шаблоны', route('templates.index'));
+});
+Breadcrumbs::for('admin.sms.templates.add', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.sms.templates');
+    $trail->push('Добавить шаблон', route('templates.add'));
+});
+Breadcrumbs::for('admin.sms.templates.edit', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.sms.templates');
+    $trail->push('Изменить шаблон', route('templates.edit'));
+});
+Breadcrumbs::for('admin.sms.list', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.sms');
+    $trail->push('СМС Рассылки', route('list.index'));
+});
+Breadcrumbs::for('admin.sms.list.show', function (BreadcrumbTrail $trail, $id) {
+    $trail->parent('admin.sms.list');
+    $trail->push('Рассылка №' . $id, route('list.show'));
+});

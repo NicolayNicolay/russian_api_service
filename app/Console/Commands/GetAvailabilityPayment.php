@@ -39,6 +39,7 @@ class GetAvailabilityPayment extends Command
         $Tracking = new Tracking('single', config('tracking.account'));
         $query->chunkById(2000, function ($numbers) use (&$bar, $Tracking) {
             foreach ($numbers as $number) {
+                sleep(1);
                 try {
                     $res = $Tracking->getOperationsByRpo($number->track);
                     if ($res) {
